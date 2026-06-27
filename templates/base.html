@@ -1,0 +1,209 @@
+{% load static %}
+{% load cache %}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>TravelHub</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="{% if theme == 'dark' %}theme-dark{% else %}theme-light{% endif %}">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="{% url 'core:home' %}">
+            TravelHub
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-lg-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'core:home' %}">Trang chủ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'core:about' %}">Giới thiệu</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'core:contact' %}">Liên hệ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {% if '/destinations/' in request.path %}active fw-bold text-white{% endif %}"
+                    href="{% url 'destinations:destination_list' %}">
+                        Địa điểm
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {% if '/favorites/' in request.path %}active fw-bold text-white{% endif %}"
+                    href="{% url 'favorites:favorite_list' %}">
+                        Yêu thích
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if '/posts/' in request.path %}active fw-bold text-white{% endif %}"
+                    href="{% url 'posts:post_list' %}">
+                        Bài viết
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        href="{% url 'news:news_list' %}">
+                        Tin tức
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'bookings:booking_history' %}">
+                        Lịch sử đặt chuyến
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'reports:dashboard' %}">
+                        Thống kê
+                    </a>
+                </li>
+                {% if user.is_authenticated %}
+
+                {% cache 300 navbar_user request.user.id %}
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown">
+
+                            {{ user.username }}
+
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+                                <a class="dropdown-item"
+                                href="{% url 'accounts:profile' %}">
+                                    Hồ sơ
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item"
+                                href="{% url 'accounts:change_password' %}">
+                                    Đổi mật khẩu
+                                </a>
+                            </li>
+
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item text-danger"
+                                href="{% url 'accounts:logout' %}">
+                                    Đăng xuất
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                    {% endcache %}
+
+                {% else %}
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                    href="{% url 'accounts:login' %}">
+                    Đăng nhập
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                    href="{% url 'accounts:register' %}">
+                    Đăng ký
+                    </a>
+                </li>
+
+                {% endif %}
+            </ul>                 
+
+
+
+            <div class="d-flex gap-2">
+                <a href="{% url 'core:set_theme' 'light' %}" class="btn btn-light btn-sm">
+                    Sáng
+                </a>
+
+                <a href="{% url 'core:set_theme' 'dark' %}" class="btn btn-dark btn-sm">
+                    Tối
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer class="footer-section mt-5">
+    <div class="container py-4">
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <h5 class="fw-bold">TravelHub</h5>
+                <p class="mb-0">
+                    Website du lịch mini xây dựng bằng Django, Bootstrap, Cookie và Session.
+                </p>
+            </div>
+
+            <div class="col-md-4">
+                <h5 class="fw-bold">Liên kết</h5>
+                <p class="mb-1">
+                    <a href="{% url 'core:home' %}">Trang chủ</a>
+                </p>
+                <p class="mb-1">
+                    <a href="{% url 'core:about' %}">Giới thiệu</a>
+                </p>
+                <p class="mb-0">
+                    <a href="{% url 'core:contact' %}">Liên hệ</a>
+                </p>
+            </div>
+
+            <div class="col-md-4">
+                <h5 class="fw-bold">Mục tiêu bài học</h5>
+                <p class="mb-0">
+                    App core giúp sinh viên hiểu template, static file, Bootstrap layout và cookie.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

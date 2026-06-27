@@ -1,0 +1,15 @@
+.env
+db.sqlite3
+media/
+staticfiles/
+venv/
+__pycache__/
+
+embedding_models/
+.chroma/
+chroma_db/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.onnx

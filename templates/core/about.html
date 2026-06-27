@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+
+        <h1 class="fw-bold">
+            Về TravelHub
+        </h1>
+
+        <p class="lead mb-0">
+            Khám phá những điểm đến đẹp, lưu lại hành trình và tìm cảm hứng cho chuyến đi tiếp theo.
+        </p>
+
+    </div>
+</section>
+
+
+<section class="container py-5">
+
+    <div class="row g-5 align-items-center">
+
+        <div class="col-lg-6">
+
+            <h2 class="fw-bold mb-4">
+                Đồng hành cùng mọi chuyến đi
+            </h2>
+
+            <p>
+                TravelHub là nền tảng du lịch giúp người dùng khám phá địa điểm nổi bật,
+                tìm kiếm thông tin hữu ích và lưu lại những nơi yêu thích.
+            </p>
+
+            <p>
+                Chúng tôi tin rằng mỗi chuyến đi không chỉ là dịch chuyển,
+                mà còn là cơ hội trải nghiệm văn hóa, thiên nhiên và những khoảnh khắc đáng nhớ.
+            </p>
+
+            <p>
+                Từ các điểm đến nổi tiếng đến những góc nhỏ ít người biết,
+                TravelHub mong muốn trở thành người bạn đồng hành trong hành trình khám phá của bạn.
+            </p>
+
+            <div class="row g-3 mt-4">
+
+                <div class="col-6">
+                    <div class="stat-box">
+
+                        <h3>100+</h3>
+
+                        <p>
+                            Điểm đến đề xuất
+                        </p>
+
+                    </div>
+                </div>
+
+
+                <div class="col-6">
+                    <div class="stat-box">
+
+                        <h3>24/7</h3>
+
+                        <p>
+                            Truy cập mọi lúc
+                        </p>
+
+                    </div>
+                </div>
+
+
+                <div class="col-6">
+                    <div class="stat-box">
+
+                        <h3>500+</h3>
+
+                        <p>
+                            Lượt lưu yêu thích
+                        </p>
+
+                    </div>
+                </div>
+
+
+                <div class="col-6">
+                    <div class="stat-box">
+
+                        <h3>∞</h3>
+
+                        <p>
+                            Cảm hứng du lịch
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-6">
+
+            <img
+                src="{% static 'images/about.png' %}"
+                class="img-fluid rounded-4 shadow"
+                alt="TravelHub">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="container pb-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold">
+            Giá trị TravelHub mang lại
+        </h2>
+
+        <p class="text-muted">
+            Trải nghiệm đơn giản – thông tin hữu ích – hành trình trọn vẹn
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm border-0">
+
+                <div class="card-body">
+
+                    <h4>
+                        📍 Khám phá địa điểm
+                    </h4>
+
+                    <p>
+                        Tìm kiếm các điểm đến nổi bật cùng thông tin mô tả trực quan.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm border-0">
+
+                <div class="card-body">
+
+                    <h4>
+                        ❤️ Lưu yêu thích
+                    </h4>
+
+                    <p>
+                        Đánh dấu những địa điểm bạn muốn quay lại trong tương lai.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card h-100 shadow-sm border-0">
+
+                <div class="card-body">
+
+                    <h4>
+                        ✍️ Chia sẻ trải nghiệm
+                    </h4>
+
+                    <p>
+                        Đọc và khám phá những bài viết du lịch đầy cảm hứng.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="container pb-5">
+
+    <div class="card shadow border-0">
+
+        <div class="card-body p-0">
+
+            <iframe
+                src="https://www.google.com/maps?q=Ho%20Chi%20Minh%20City&output=embed"
+                width="100%"
+                height="400"
+                style="border:0;"
+                loading="lazy"
+                class="rounded-4">
+            </iframe>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="fw-bold">Địa điểm yêu thích</h1>
+        <p class="lead mb-0">
+            Danh sách địa điểm bạn đã lưu bằng session.
+        </p>
+    </div>
+</section>
+
+<section class="container py-5">
+
+    {% if destinations %}
+    <div class="mb-4">
+        <a href="{% url 'favorites:clear_favorites' %}" class="btn btn-danger">
+            Xóa tất cả
+        </a>
+    </div>
+    {% endif %}
+
+    <div class="row g-4">
+
+        {% for destination in destinations %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card service-card h-100 shadow-sm">
+
+                <img src="{{ destination.image.url }}"
+                     class="card-img-top"
+                     alt="{{ destination.name }}">
+
+                <div class="card-body">
+                    <span class="badge bg-primary mb-2">
+                        {{ destination.city }}
+                    </span>
+
+                    <h5 class="fw-bold">
+                        {{ destination.name }}
+                    </h5>
+
+                    <p>
+                        {{ destination.short_description|truncatewords:18 }}
+                    </p>
+
+                    <p class="fw-bold text-primary">
+                        {{ destination.price|intcomma }} VNĐ
+                    </p>
+
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'destinations:destination_detail' destination.id %}"
+                           class="btn btn-primary btn-sm">
+                            Chi tiết
+                        </a>
+
+                        <a href="{% url 'favorites:remove_favorite' destination.id %}"
+                           class="btn btn-outline-danger btn-sm">
+                            Xóa
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-warning">
+                Bạn chưa thêm địa điểm yêu thích nào.
+            </div>
+
+            <a href="{% url 'destinations:destination_list' %}" class="btn btn-primary">
+                Xem địa điểm
+            </a>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

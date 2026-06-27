@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="fw-bold">Liên hệ TravelHub</h1>
+        <p class="lead mb-0">
+            Gửi câu hỏi, góp ý hoặc yêu cầu hỗ trợ đến đội ngũ TravelHub.
+        </p>
+    </div>
+</section>
+
+<section class="container py-5">
+
+    <div class="row g-4 align-items-stretch">
+
+        <div class="col-lg-5">
+            <div class="card h-100 shadow border-0">
+                <div class="card-body p-4">
+
+                    <h3 class="fw-bold mb-3">
+                        Thông tin liên hệ
+                    </h3>
+
+                    <p class="text-muted">
+                        TravelHub luôn sẵn sàng lắng nghe ý kiến đóng góp từ bạn để cải thiện trải nghiệm du lịch.
+                    </p>
+
+                    <div class="mb-3">
+                        <h6 class="fw-bold mb-1">Email</h6>
+                        <p class="mb-0">travelhub@example.com</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="fw-bold mb-1">Thời gian phản hồi</h6>
+                        <p class="mb-0">Trong vòng 24 giờ làm việc</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="fw-bold mb-1">Nội dung hỗ trợ</h6>
+                        <p class="mb-0">
+                            Góp ý địa điểm, báo lỗi website, yêu cầu hỗ trợ tài khoản hoặc bài viết du lịch.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="card shadow border-0">
+                <div class="card-body p-4">
+
+                    <h3 class="fw-bold mb-4">
+                        Gửi tin nhắn
+                    </h3>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">
+                                    Họ tên
+                                </label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    class="form-control"
+                                    placeholder="Nhập họ tên của bạn"
+                                    required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">
+                                    Email
+                                </label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    class="form-control"
+                                    placeholder="Nhập email liên hệ"
+                                    required>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">
+                                    Tiêu đề
+                                </label>
+                                <input
+                                    type="text"
+                                    name="subject"
+                                    class="form-control"
+                                    placeholder="Ví dụ: Góp ý địa điểm du lịch"
+                                    required>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">
+                                    Nội dung
+                                </label>
+                                <textarea
+                                    name="message"
+                                    rows="6"
+                                    class="form-control"
+                                    placeholder="Nhập nội dung bạn muốn gửi..."
+                                    required></textarea>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary px-4">
+                                    Gửi liên hệ
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

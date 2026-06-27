@@ -1,0 +1,341 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+
+        <h1 class="fw-bold">
+            Địa điểm du lịch
+        </h1>
+
+        <p class="lead mb-0">
+            Khám phá những địa điểm nổi bật và lên kế hoạch cho chuyến đi của bạn.
+        </p>
+
+    </div>
+</section>
+
+
+<section class="container py-5">
+
+    <!-- SEARCH -->
+    <form method="GET" class="mb-4">
+
+        <div class="input-group shadow-sm">
+
+            <input
+                type="text"
+                name="q"
+                class="form-control"
+                placeholder="Nhập tên địa điểm..."
+                value="{{ keyword }}"
+            >
+
+            <input
+                type="hidden"
+                name="min_price"
+                value="{{ min_price }}"
+            >
+
+            <input
+                type="hidden"
+                name="max_price"
+                value="{{ max_price }}"
+            >
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Tìm kiếm
+            </button>
+
+        </div>
+
+    </form>
+
+
+    <div class="row g-4">
+
+        <!-- FILTER -->
+        <div class="col-lg-3">
+
+            <div class="card border-0 shadow rounded-4">
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold mb-4">
+                        Bộ lọc
+                    </h5>
+
+                    <form method="GET">
+
+                        <input
+                            type="hidden"
+                            name="q"
+                            value="{{ keyword }}"
+                        >
+
+                        <div class="mb-3">
+
+                            <label>
+                                Giá từ
+                            </label>
+
+                            <input
+                                type="number"
+                                name="min_price"
+                                class="form-control"
+                                value="{{ min_price }}"
+                            >
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label>
+                                Giá đến
+                            </label>
+
+                            <input
+                                type="number"
+                                name="max_price"
+                                class="form-control"
+                                value="{{ max_price }}"
+                            >
+
+                        </div>
+
+                        <button
+                            class="btn btn-primary w-100 mb-2"
+                        >
+                            Áp dụng lọc
+                        </button>
+
+                        <a
+                            href="{% url 'destinations:destination_list' %}"
+                            class="btn btn-outline-secondary w-100"
+                        >
+                            Xóa lọc
+                        </a>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DESTINATION LIST -->
+        <div class="col-lg-9">
+
+            <div class="row g-4">
+
+                {% for destination in page_obj %}
+
+                <div class="col-md-6 col-xl-4">
+
+                    <div class="card service-card h-100 shadow rounded-4 border-0 overflow-hidden">
+
+                        <img
+                            src="{{ destination.image.url }}"
+                            class="card-img-top"
+                            alt="{{ destination.name }}"
+                        >
+
+                        <div class="card-body">
+
+                            <span class="badge bg-primary mb-3">
+                                {{ destination.city }}
+                            </span>
+
+                            <h4 class="fw-bold">
+                                {{ destination.name }}
+                            </h4>
+
+                            <p>
+                                {{ destination.short_description|truncatewords:18 }}
+                            </p>
+
+                            <p class="fw-bold text-primary fs-4">
+                                {{ destination.price|intcomma }} VNĐ
+                            </p>
+
+
+                            <!-- BUTTON -->
+                            <div class="d-flex gap-2 mb-3">
+
+                                <a
+                                    href="{% url 'destinations:destination_detail' destination.id %}"
+                                    class="btn btn-primary btn-sm"
+                                >
+                                    Xem chi tiết
+                                </a>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-success btn-sm"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#booking{{ destination.id }}"
+                                >
+                                    Đặt chuyến
+                                </button>
+
+                                <a
+                                    href="{% url 'favorites:add_favorite' destination.id %}"
+                                    class="btn btn-outline-danger btn-sm"
+                                >
+                                    Yêu thích
+                                </a>
+
+                            </div>
+
+
+                            <!-- BOOKING FORM -->
+                            <div
+                                class="collapse"
+                                id="booking{{ destination.id }}"
+                            >
+
+                                <div class="card card-body bg-light border-0 rounded-3">
+
+                                    <form
+                                        method="POST"
+                                        action="{% url 'bookings:create_booking' destination.id %}"
+                                    >
+
+                                        {% csrf_token %}
+
+                                        <div class="mb-2">
+
+                                            <label>
+                                                Ngày khởi hành
+                                            </label>
+
+                                            <input
+                                                type="date"
+                                                name="start_date"
+                                                class="form-control form-control-sm"
+                                                required
+                                            >
+
+                                        </div>
+
+
+                                        <div class="mb-3">
+
+                                            <label>
+                                                Số người
+                                            </label>
+
+                                            <input
+                                                type="number"
+                                                name="people"
+                                                value="1"
+                                                min="1"
+                                                class="form-control form-control-sm"
+                                                required
+                                            >
+
+                                        </div>
+
+
+                                        <button
+                                            class="btn btn-success btn-sm w-100"
+                                        >
+                                            Xác nhận đặt chuyến
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% empty %}
+
+                <div class="col-12">
+
+                    <div class="alert alert-warning">
+
+                        Không tìm thấy địa điểm phù hợp.
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- PAGINATION -->
+            <nav class="mt-5">
+
+                <ul class="pagination justify-content-center">
+
+                    {% if page_obj.has_previous %}
+
+                    <li class="page-item">
+
+                        <a
+                            class="page-link"
+                            href="?page={{ page_obj.previous_page_number }}"
+                        >
+                            Trước
+                        </a>
+
+                    </li>
+
+                    {% endif %}
+
+
+                    <li class="page-item active">
+
+                        <span class="page-link">
+
+                            {{ page_obj.number }}
+                            /
+                            {{ page_obj.paginator.num_pages }}
+
+                        </span>
+
+                    </li>
+
+
+                    {% if page_obj.has_next %}
+
+                    <li class="page-item">
+
+                        <a
+                            class="page-link"
+                            href="?page={{ page_obj.next_page_number }}"
+                        >
+                            Sau
+                        </a>
+
+                    </li>
+
+                    {% endif %}
+
+                </ul>
+
+            </nav>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h2 class="mb-4">
+        Lịch sử đặt chuyến
+    </h2>
+
+
+    {% for booking in bookings %}
+
+        <div class="card shadow-sm border-0 rounded-4 mb-3">
+
+            <div class="card-body">
+
+                <h5 class="fw-bold mb-3">
+                    {{ booking.destination.name }}
+                </h5>
+
+
+                <p class="mb-2">
+                    <strong>Ngày khởi hành:</strong>
+                    {{ booking.start_date }}
+                </p>
+
+
+                <p class="mb-2">
+                    <strong>Số người:</strong>
+                    {{ booking.people }}
+                </p>
+
+
+                <p class="mb-0 text-primary fw-bold">
+                    Tổng tiền:
+                    {{ booking.total_price|intcomma }} VNĐ
+                </p>
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <div class="alert alert-warning rounded-4">
+
+            Bạn chưa có chuyến nào.
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

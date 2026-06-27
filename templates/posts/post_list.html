@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="fw-bold">Bài viết du lịch</h1>
+        <p class="lead mb-0">
+            Kinh nghiệm, lịch trình và cảm hứng cho những chuyến đi.
+        </p>
+    </div>
+</section>
+
+<section class="container py-5">
+
+    <div class="row g-4">
+
+        {% for post in page_obj %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card service-card h-100 shadow-sm">
+
+                <img src="{{ post.thumbnail.url }}"
+                     class="card-img-top"
+                     alt="{{ post.title }}">
+
+                <div class="card-body">
+                    <p class="text-muted mb-2">
+                        {{ post.created_at|date:"d/m/Y" }} · {{ post.author }}
+                    </p>
+
+                    <h5 class="fw-bold">
+                        {{ post.title }}
+                    </h5>
+
+                    <p>
+                        {{ post.summary|truncatewords:22 }}
+                    </p>
+
+                    <a href="{% url 'posts:post_detail' post.id %}"
+                       class="btn btn-primary">
+                        Đọc bài viết
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-warning">
+                Chưa có bài viết nào. Hãy vào admin để thêm bài viết.
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <nav class="mt-5">
+        <ul class="pagination justify-content-center">
+
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                    Trước
+                </a>
+            </li>
+            {% endif %}
+
+            <li class="page-item active">
+                <span class="page-link">
+                    Trang {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                </span>
+            </li>
+
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                    Sau
+                </a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+
+</section>
+
+{% endblock %}

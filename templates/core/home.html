@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+        <div class="row">
+            <div class="col-lg-7">
+
+                <span class="badge bg-warning text-dark mb-3">
+                    Khám phá Việt Nam
+                </span>
+
+                <h1 class="display-4 fw-bold">
+                    Lên kế hoạch cho chuyến đi đáng nhớ của bạn
+                </h1>
+
+                <p class="lead mt-3">
+                    TravelHub giúp bạn khám phá địa điểm đẹp, đọc kinh nghiệm du lịch
+                    và lưu lại những nơi yêu thích.
+                </p>
+
+                <div class="mt-4">
+                    <a href="{% url 'core:about' %}" class="btn btn-light btn-lg me-2">
+                        Tìm hiểu thêm
+                    </a>
+
+                    <a href="{% url 'core:contact' %}" class="btn btn-outline-light btn-lg">
+                        Liên hệ
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Dịch vụ nổi bật</h2>
+        <p class="text-muted">
+            App core hoạt động như một website giới thiệu hoàn chỉnh.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        {% for service in services %}
+        <div class="col-md-4">
+            <div class="card service-card h-100 shadow-sm">
+
+                <img src="{% static service.image %}" class="card-img-top" alt="{{ service.title }}">
+
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">
+                        {{ service.title }}
+                    </h5>
+
+                    <p class="card-text">
+                        {{ service.description }}
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</section>
+<!--địa điểm nổi bật-->
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Địa điểm nổi bật</h2>
+        <p class="text-muted">
+            Những điểm đến được TravelHub gợi ý cho bạn.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        {% for destination in featured_destinations %}
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+
+                {% if destination.image %}
+                <img src="{{ destination.image.url }}"
+                     class="card-img-top"
+                     alt="{{ destination.name }}"
+                     style="height: 220px; object-fit: cover;">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">
+                        {{ destination.name }}
+                    </h5>
+
+                    <p class="text-muted mb-2">
+                        {{ destination.city }}
+                    </p>
+
+                    <p class="card-text">
+                        {{ destination.short_description|truncatewords:20 }}
+                    </p>
+
+                    <a href="{% url 'destinations:destination_detail' destination.pk %}"
+                       class="btn btn-primary">
+                        Xem chi tiết
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p class="text-muted">
+                Chưa có địa điểm nổi bật.
+            </p>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<section class="container pb-5">
+    <div class="row g-4 align-items-center">
+
+        <div class="col-lg-6">
+            <img src="{% static 'images/about.png' %}" class="img-fluid rounded-4 shadow" alt="TravelHub">
+        </div>
+
+        <div class="col-lg-6">
+            <h2 class="fw-bold">
+                Vì sao chọn TravelHub?
+            </h2>
+
+            <p class="mt-3">
+                Đây là project luyện tập Django theo hướng thực tế. Mỗi app được xây dựng
+                hoàn chỉnh trước khi chuyển sang app tiếp theo.
+            </p>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    Giao diện responsive bằng Bootstrap
+                </li>
+                <li class="list-group-item">
+                    Có template kế thừa từ base.html
+                </li>
+                <li class="list-group-item">
+                    Có static file gồm CSS và hình ảnh
+                </li>
+                <li class="list-group-item">
+                    Có cookie lưu theme sáng/tối
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

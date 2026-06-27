@@ -1,0 +1,158 @@
+/* ==========================================
+   Dùng cho Django Admin + Unfold
+========================================== */
+
+
+/* ==========================================
+   LABEL
+========================================== */
+
+label,
+.fieldBox label,
+.form-row label,
+.aligned label,
+.inline-related label,
+.inline-group label,
+fieldset label,
+fieldset .flex.flex-col > label {
+    font-weight: 800 !important;
+    color: #111827 !important;
+    font-size: 16px !important;
+}
+
+/* Một số label của Unfold không nằm trong thẻ label */
+div[class*="field-"] > div:first-child {
+    font-weight: 800 !important;
+    color: #111827 !important;
+    font-size: 16px !important;
+}
+
+.readonly,
+.help,
+.form-row div,
+.fieldBox div,
+.inline-related div {
+    font-weight: 400 !important;
+}
+
+
+/* ==========================================
+   TIÊU ĐỀ SECTION
+========================================== */
+
+.module h2,
+.inline-group h2,
+fieldset h2 {
+    font-weight: 800 !important;
+    font-size: 18px !important;
+    color: #111827 !important;
+}
+
+
+/* ==========================================
+   INPUT
+========================================== */
+
+.admin-input-short {
+    max-width: 500px !important;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="url"],
+select {
+    border-radius: 12px !important;
+}
+
+
+/* ==========================================
+   TEXTAREA
+========================================== */
+
+.admin-textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100px !important;
+    resize: vertical !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+}
+
+textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 12px !important;
+}
+
+
+/* ==========================================
+   IMAGE PREVIEW
+========================================== */
+
+.admin-image-preview-box {
+    margin-bottom: 12px;
+}
+
+.admin-image-preview {
+    width: 160px !important;
+    height: 160px !important;
+    object-fit: cover !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .15) !important;
+}
+
+.admin-image-preview-empty {
+    width: 160px;
+    height: 160px;
+    border-radius: 20px;
+    background: #f3f4f6;
+    border: 2px dashed #c4b5fd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400 !important;
+    color: #6b7280;
+}
+
+
+/* ==========================================
+   INLINE
+========================================== */
+
+.inline-related {
+    border-radius: 16px !important;
+}
+
+.inline-group {
+    border-radius: 18px !important;
+}
+
+
+/* ==========================================
+   FIELD SPACING
+========================================== */
+
+.form-row {
+    margin-bottom: 20px !important;
+}
+
+
+/* ==========================================
+   HELP TEXT
+========================================== */
+
+.help {
+    color: #6b7280 !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+}
+
+.admin-textarea-large {
+    min-height: 260px !important;
+}
+
+.admin-textarea-medium {
+    min-height: 180px !important;
+}

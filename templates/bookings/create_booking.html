@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Đặt chuyến: {{ destination.name }}</h2>
+
+    <p>
+        Giá mỗi người:
+        <strong>{{ destination.price }} VNĐ</strong>
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            {{ form.start_date.label_tag }}
+            {{ form.start_date }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.people.label_tag }}
+            {{ form.people }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.note.label_tag }}
+            {{ form.note }}
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Xác nhận đặt chuyến
+        </button>
+    </form>
+</div>
+{% endblock %}

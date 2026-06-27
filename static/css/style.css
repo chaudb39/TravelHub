@@ -1,0 +1,212 @@
+:root {
+    --primary-color: #0d6efd;
+    --dark-bg: #121212;
+    --dark-card: #1f1f1f;
+    --light-bg: #f8f9fa;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.theme-light {
+    background-color: var(--light-bg);
+    color: #212529;
+}
+
+.theme-dark {
+    background-color: var(--dark-bg);
+    color: #f8f9fa;
+}
+
+.theme-dark .card,
+.theme-dark .list-group-item,
+.theme-dark .contact-info-card,
+.theme-dark .contact-form-card,
+.theme-dark .stat-box {
+    background-color: var(--dark-card);
+    color: #f8f9fa;
+    border-color: #333;
+}
+
+.theme-dark .text-muted {
+    color: #cfcfcf !important;
+}
+
+.hero-section {
+    min-height: 560px;
+    background-image: url('/static/images/banner.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0.25)
+    );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.service-card {
+    border: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: 0.25s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+}
+
+.service-card img {
+    height: 230px;
+    object-fit: cover;
+}
+
+.page-header {
+    background: linear-gradient(135deg, #0d6efd, #4dabf7);
+    color: white;
+    padding: 70px 0;
+}
+
+.stat-box {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    text-align: center;
+    border: 1px solid #eee;
+}
+
+.stat-box h3 {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.contact-info-card,
+.contact-form-card {
+    background: white;
+    border-radius: 18px;
+    padding: 28px;
+}
+
+.footer-section {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.footer-section a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+/* destination */
+.card-img-top {
+    height: 240px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.theme-dark .page-link {
+    background-color: #1f1f1f;
+    color: white;
+    border-color: #333;
+}
+
+.theme-dark .page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+/* post */
+.post-detail-img {
+    max-height: 460px;
+    object-fit: cover;
+}
+
+.post-content {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.post-content img {
+    max-width: 100%;
+    border-radius: 16px;
+    margin: 20px 0;
+}
+
+.post-content table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+.post-content table,
+.post-content th,
+.post-content td {
+    border: 1px solid #ddd;
+}
+
+.post-content th,
+.post-content td {
+    padding: 12px;
+}
+
+.theme-dark .post-content table,
+.theme-dark .post-content th,
+.theme-dark .post-content td {
+    border-color: #444;
+}
+
+/* =========================
+   STAR RATING
+========================= */
+
+/* Khung chứa 5 ngôi sao */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 4px;
+}
+
+/* Ẩn radio thật, chỉ cho người dùng thấy ngôi sao */
+.star-rating input {
+    display: none;
+}
+
+/* Giao diện sao mặc định */
+.star-rating label {
+    font-size: 36px;
+    line-height: 1;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* Khi rê chuột vào sao */
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #ffc107;
+    transform: scale(1.08);
+}
+
+/* Khi đã chọn sao */
+.star-rating input:checked ~ label {
+    color: #ffc107;
+}
